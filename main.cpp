@@ -41,7 +41,7 @@ int main(int argc, char** argv)
     glUniform1i(window_height_uniform, window.GetHeight());
 
     // Grid
-    Grid grid(7, 5, program.GetID());
+    Grid grid(16, 12, program.GetID());
 
     // Loop
     GLuint    vao;

@@ -30,6 +30,7 @@ class Grid
     GLuint grid_texture;
 
     vector<GLubyte> grid_data;
+    vector<GLubyte> grid_copy;
 };
 
 #endif // GRID_H

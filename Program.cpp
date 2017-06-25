@@ -7,7 +7,6 @@ Program::Program()
 
 Program::~Program()
 {
-    glDeleteProgram(program);
 }
 
 void Program::AddShader(const char* path, GLenum type)

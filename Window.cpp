@@ -25,8 +25,6 @@ Window::Window()
 
 Window::~Window()
 {
-    SDL_GL_DeleteContext(context);
-    SDL_DestroyWindow(window);
 }
 
 void Window::HandleInput(SDL_Event& event)
