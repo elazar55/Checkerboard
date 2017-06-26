@@ -79,7 +79,7 @@ void Grid::HandleMouse(Mouse& mouse)
         grid_data[index + 2] = ~grid_data[index + 2];
 
         // Top
-        if (index + x_divisions * 3 < (x_divisions * y_divisions) * 3)
+        if (iy < y_divisions - 1)
         {
             grid_data[index + x_divisions * 3 + 0] = ~grid_data[index + x_divisions * 3 + 0];
             grid_data[index + x_divisions * 3 + 1] = ~grid_data[index + x_divisions * 3 + 1];
@@ -87,7 +87,7 @@ void Grid::HandleMouse(Mouse& mouse)
         }
 
         // Bottom
-        if (index - x_divisions * 3 > 0)
+        if (iy > 0)
         {
             grid_data[index - x_divisions * 3 + 0] = ~grid_data[index - x_divisions * 3 + 0];
             grid_data[index - x_divisions * 3 + 1] = ~grid_data[index - x_divisions * 3 + 1];
@@ -95,7 +95,7 @@ void Grid::HandleMouse(Mouse& mouse)
         }
 
         // Left
-        if (index - 1 > 0 && ix > 0)
+        if (ix > 0)
         {
         grid_data[index - 1] = ~grid_data[index - 1];
         grid_data[index - 2] = ~grid_data[index - 2];
@@ -103,7 +103,7 @@ void Grid::HandleMouse(Mouse& mouse)
         }
 
         // Right
-        if (index + 3 < (x_divisions * y_divisions) * 3 && ix < x_divisions - 1)
+        if (ix < x_divisions - 1)
         {
             grid_data[index + 3] = ~grid_data[index + 3];
             grid_data[index + 4] = ~grid_data[index + 4];
@@ -120,7 +120,7 @@ void Grid::HandleMouse(Mouse& mouse)
         grid_data[index + 2] = grid_copy[index + 2] + 10;
 
         // Top
-        if (index + x_divisions * 3 + 0 < (x_divisions * y_divisions) * 3)
+        if (iy < y_divisions - 1)
         {
             grid_data[index + x_divisions * 3 + 0] = grid_copy[index + x_divisions * 3 + 0] + 10;
             grid_data[index + x_divisions * 3 + 1] = grid_copy[index + x_divisions * 3 + 1] + 10;
@@ -128,7 +128,7 @@ void Grid::HandleMouse(Mouse& mouse)
         }
 
         // Bottom
-        if (index - x_divisions * 3 + 0 > 0)
+        if (iy > 0)
         {
             grid_data[index - x_divisions * 3 + 0] = grid_copy[index - x_divisions * 3 + 0] + 10;
             grid_data[index - x_divisions * 3 + 1] = grid_copy[index - x_divisions * 3 + 1] + 10;
@@ -136,7 +136,7 @@ void Grid::HandleMouse(Mouse& mouse)
         }
 
         // Left
-        if (index - 1 > 0 && ix > 0)
+        if (ix > 0)
         {
             grid_data[index - 1] = grid_data[index - 1] + 10;
             grid_data[index - 2] = grid_data[index - 2] + 10;
@@ -144,7 +144,7 @@ void Grid::HandleMouse(Mouse& mouse)
         }
 
         // Right
-        if (index + 3 < (x_divisions * y_divisions) * 3 && ix < x_divisions - 1)
+        if (ix < x_divisions - 1)
         {
             grid_data[index + 3] = grid_data[index + 3] + 10;
             grid_data[index + 4] = grid_data[index + 4] + 10;
