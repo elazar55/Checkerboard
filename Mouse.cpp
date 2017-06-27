@@ -19,7 +19,6 @@ void Mouse::Update()
     if (button_bitmask & SDL_BUTTON_LEFT) previous_state = true;
                                      else previous_state = false;
 
-    SDL_PumpEvents();
     button_bitmask = SDL_GetMouseState(&x_position, &y_position);
 
     if (button_bitmask & SDL_BUTTON_LEFT) current_state = true;

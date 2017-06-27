@@ -29,9 +29,7 @@ Window::~Window()
 
 void Window::HandleInput(SDL_Event& event)
 {
-    SDL_PollEvent(&event);
-    if (event.type           == SDL_QUIT)    quit = true;
-//    if (event.key.keysym.sym == SDLK_ESCAPE) quit = true;
+    if (event.type == SDL_QUIT) quit = true;
 }
 
 bool Window::IsRunning()

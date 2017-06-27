@@ -6,10 +6,9 @@ Grid::Grid(int x_divisions, int y_divisions, GLuint program_ID)
     this->y_divisions = y_divisions;
 
     grid_data.resize(x_divisions * y_divisions * 3, 0);
-    srand(time(NULL));
-    GLubyte color_r = rand() % 200;
-    GLubyte color_g = rand() % 200;
-    GLubyte color_b = rand() % 200;
+    GLubyte color_r = (rand() % 230) + 10;
+    GLubyte color_g = (rand() % 230) + 10;
+    GLubyte color_b = (rand() % 230) + 10;
     for (size_t i = 0; i < grid_data.size(); i += 3)
     {
         if (rand() % 2)
@@ -43,6 +42,7 @@ Grid::Grid(int x_divisions, int y_divisions, GLuint program_ID)
 
 Grid::~Grid()
 {
+    glDeleteTextures(1, &grid_texture);
 }
 
 void Grid::Render()

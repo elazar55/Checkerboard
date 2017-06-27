@@ -19,6 +19,17 @@ void APIENTRY gl_callback(GLenum        source,
     if (severity == GL_DEBUG_SEVERITY_HIGH) exit(id);
 }
 
+
+void HandleKeys(SDL_Event& event, Grid* grid, GLuint program_ID)
+{
+    SDL_PollEvent(&event);
+    if (event.key.keysym.sym == SDLK_r && event.key.state  == SDL_PRESSED)
+    {
+        delete grid;
+        grid = new Grid(16, 12, program_ID);
+    }
+}
+
 int main(int argc, char** argv)
 {
     Window window;
@@ -41,7 +52,7 @@ int main(int argc, char** argv)
     glUniform1i(window_height_uniform, window.GetHeight());
 
     // Grid
-    Grid grid(16, 12, program.GetID());
+    Grid* grid = new Grid(16, 12, program.GetID());
 
     // Loop
     GLuint    vao;
@@ -54,11 +65,13 @@ int main(int argc, char** argv)
     {
         mouse.Update();
 
-        grid.HandleMouse(mouse);
-        grid.Render();
+        grid->HandleMouse(mouse);
+        grid->Render();
 
         window.HandleInput(event);
         window.RenderPresent();
+
+        HandleKeys(event, grid, program.GetID());
     }
 
     return 0;
