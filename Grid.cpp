@@ -9,6 +9,7 @@ Grid::Grid(int x_divisions, int y_divisions, GLuint program_ID)
     GLubyte color_r = (rand() % 230) + 10;
     GLubyte color_g = (rand() % 230) + 10;
     GLubyte color_b = (rand() % 230) + 10;
+
     for (size_t i = 0; i < grid_data.size(); i += 3)
     {
         if (rand() % 2)
@@ -35,19 +36,31 @@ Grid::Grid(int x_divisions, int y_divisions, GLuint program_ID)
 
     glGenTextures(1, &grid_texture);
     glBindTexture(GL_TEXTURE_1D, grid_texture);
-    glTexImage1D(GL_TEXTURE_1D, 0, GL_RGB, grid_data.size() / 3, 0, GL_RGB, GL_UNSIGNED_BYTE, grid_data.data());
+
+    glTexImage1D(GL_TEXTURE_1D,         // Target
+                 0,                     // Level
+                 GL_RGB,                // Internal Format
+                 grid_data.size() / 3,  // Width
+                 0,                     // Border
+                 GL_RGB,                // Format
+                 GL_UNSIGNED_BYTE,      // Type
+                 grid_data.data());     // Pixels
+
     glTexParameteri(GL_TEXTURE_1D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
     glTexParameteri(GL_TEXTURE_1D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 }
 
-Grid::~Grid()
-{
-    glDeleteTextures(1, &grid_texture);
-}
+Grid::~Grid() { glDeleteTextures(1, &grid_texture); }
 
 void Grid::Render()
 {
-    glTexImage1D(GL_TEXTURE_1D, 0, GL_RGB, grid_data.size() / 3, 0, GL_RGB, GL_UNSIGNED_BYTE, grid_data.data()); // Fix this
+    glTexSubImage1D(GL_TEXTURE_1D,         // Target
+                    0,                     // Level
+                    0,                     // Offset
+                    grid_data.size() / 3,  // Width
+                    GL_RGB,                // Format
+                    GL_UNSIGNED_BYTE,      // Type
+                    grid_data.data());     // Pixels
 
     glClearColor(0, 0, 0, 1);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -59,7 +72,8 @@ void Grid::HandleMouse(Mouse& mouse)
     int x_seperator = (800 / x_divisions);
     int y_seperator = (600 / y_divisions);
 
-    int index = (mouse.GetX() / x_seperator) + (x_divisions * ((y_divisions - 1) - // Inverted Y Axis
+    int index = (mouse.GetX() / x_seperator) +
+                (x_divisions * ((y_divisions - 1) -  // Inverted Y Axis
                 (mouse.GetY() / y_seperator)));
 
     int ix = index % x_divisions;
@@ -97,9 +111,9 @@ void Grid::HandleMouse(Mouse& mouse)
         // Left
         if (ix > 0)
         {
-        grid_data[index - 1] = ~grid_data[index - 1];
-        grid_data[index - 2] = ~grid_data[index - 2];
-        grid_data[index - 3] = ~grid_data[index - 3];
+            grid_data[index - 1] = ~grid_data[index - 1];
+            grid_data[index - 2] = ~grid_data[index - 2];
+            grid_data[index - 3] = ~grid_data[index - 3];
         }
 
         // Right

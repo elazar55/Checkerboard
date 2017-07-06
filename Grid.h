@@ -33,4 +33,4 @@ class Grid
     vector<GLubyte> grid_copy;
 };
 
-#endif // GRID_H
+#endif  // GRID_H

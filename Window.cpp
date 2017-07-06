@@ -19,7 +19,12 @@ Window::Window()
     SDL_GL_SetAttribute(SDL_GL_CONTEXT_FLAGS, SDL_GL_CONTEXT_DEBUG_FLAG);
 
     // Creates and initializes window and contexts
-    window  = SDL_CreateWindow(title.c_str(), x_position, y_position, window_width_value, window_height_value, flags);
+    window  = SDL_CreateWindow(title.c_str(),        // Title
+                               x_position,           // X
+                               y_position,           // Y
+                               window_width_value,   // Width
+                               window_height_value,  // Height
+                               flags);               // Flags
     context = SDL_GL_CreateContext(window);
 }
 

@@ -13,12 +13,12 @@ class Window
     Window();
     ~Window();
 
-    void        HandleInput(SDL_Event& event);
     void        RenderPresent();
     bool        IsRunning();
     SDL_Window* GetID();
     int         GetWidth();
     int         GetHeight();
+    void        HandleInput(SDL_Event& event);
 
   private:
     bool          quit;
@@ -30,4 +30,4 @@ class Window
     SDL_GLContext context;
 };
 
-#endif // WINDOW_H
+#endif  // WINDOW_H
