@@ -20,18 +20,28 @@ void APIENTRY gl_callback(GLenum        source,
 }
 
 
-void HandleKeys(SDL_Event& event, Grid* grid, GLuint program_ID)
+void HandleKeys(SDL_Event& event, Grid* grid, GLuint program_ID, Mouse& mouse)
 {
-    SDL_PollEvent(&event);
     if (event.key.keysym.sym == SDLK_r && event.key.state  == SDL_PRESSED)
     {
         delete grid;
         grid = new Grid(16, 12, program_ID);
     }
+    if (mouse.LeftClick())
+    {
+        if (grid->IsSolved())
+        {
+            cout << "Solved!" << endl;
+
+            delete grid;
+            grid = new Grid(16, 12, program_ID);
+        }
+    }
 }
 
 int main(int argc, char** argv)
 {
+    srand(time(NULL));
     Window window;
 
     // Gets all the functions for OpenGL
@@ -54,16 +64,19 @@ int main(int argc, char** argv)
     // Grid
     Grid* grid = new Grid(16, 12, program.GetID());
 
-    // Loop
-    GLuint    vao;
+    // Input objects
+    Mouse     mouse;
     SDL_Event event;
-    Mouse mouse;
+
+    GLuint    vao;
     glCreateVertexArrays(1, &vao);
     glBindVertexArray(vao);
 
+    // Loop
     while (window.IsRunning())
     {
         mouse.Update();
+        SDL_PollEvent(&event);
 
         grid->HandleMouse(mouse);
         grid->Render();
@@ -71,7 +84,7 @@ int main(int argc, char** argv)
         window.HandleInput(event);
         window.RenderPresent();
 
-        HandleKeys(event, grid, program.GetID());
+        HandleKeys(event, grid, program.GetID(), mouse);
     }
 
     return 0;

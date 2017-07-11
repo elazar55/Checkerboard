@@ -20,6 +20,7 @@ class Grid
 
     void Render();
     void HandleMouse(Mouse& mouse);
+    bool IsSolved();
 
   private:
     int x_divisions;

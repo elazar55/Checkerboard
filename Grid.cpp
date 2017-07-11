@@ -63,7 +63,7 @@ void Grid::Render()
                     grid_data.data());     // Pixels
 
     glClearColor(0, 0, 0, 1);
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    glClear(GL_COLOR_BUFFER_BIT);
     glDrawArrays(GL_TRIANGLES, 0, 6);
 }
 
@@ -86,7 +86,7 @@ void Grid::HandleMouse(Mouse& mouse)
 
     if (mouse.LeftClick())
     {
-        cout << ix << " " << iy << endl;
+        cout << "X: " << ix << endl << "Y: " << iy << endl;
         // Center
         grid_data[index + 0] = ~grid_data[index + 0];
         grid_data[index + 1] = ~grid_data[index + 1];
@@ -126,6 +126,7 @@ void Grid::HandleMouse(Mouse& mouse)
 
         grid_copy = grid_data;
     }
+    // Hovering over a square
     else
     {
         // Center
@@ -165,4 +166,27 @@ void Grid::HandleMouse(Mouse& mouse)
             grid_data[index + 5] = grid_data[index + 5] + 10;
         }
     }
+}
+
+bool Grid::IsSolved()
+{
+    for (size_t i = 0; i < grid_data.size() - 3; i +=3 )
+    {
+        GLubyte color_r = grid_data[i + 0];
+        GLubyte color_g = grid_data[i + 1];
+        GLubyte color_b = grid_data[i + 2];
+
+        GLubyte next_color_r = grid_data[i + 3];
+        GLubyte next_color_g = grid_data[i + 4];
+        GLubyte next_color_b = grid_data[i + 5];
+
+        if (color_r != next_color_r)
+        if (color_g != next_color_g)
+        if (color_b != next_color_b)
+        {
+            return false;
+        }
+    }
+
+    return true;
 }
