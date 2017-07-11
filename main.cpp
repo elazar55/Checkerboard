@@ -75,6 +75,7 @@ int main(int argc, char** argv)
     // Loop
     while (window.IsRunning())
     {
+        // Polls all the inputs once, here
         mouse.Update();
         SDL_PollEvent(&event);
 
