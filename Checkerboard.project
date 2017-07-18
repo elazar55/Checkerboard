@@ -31,13 +31,13 @@
     </GlobalSettings>
     <Configuration Name="Debug" CompilerType="MinGW ( TDM-GCC-32 )" DebuggerType="GNU gdb debugger" Type="Executable" BuildCmpWithGlobalSettings="append" BuildLnkWithGlobalSettings="append" BuildResWithGlobalSettings="append">
       <Compiler Options="-g;-O0;-Wall" C_Options="-g;-O0;-Wall" Assembler="" Required="yes" PreCompiledHeader="" PCHInCommandLine="no" PCHFlags="" PCHFlagsPolicy="0">
-        <IncludePath Value="C:\Dev\SDL2-2.0.5\i686-w64-mingw32\include\SDL2"/>
-        <IncludePath Value="C:\Dev\GLEW\include"/>
-        <IncludePath Value="C:\Dev\GLM"/>
+        <IncludePath Value="D:\SDL2-2.0.5\i686-w64-mingw32\include\SDL2"/>
+        <IncludePath Value="D:\GLEW\include"/>
+        <IncludePath Value="D:\glm\glm"/>
       </Compiler>
       <Linker Options="" Required="yes">
-        <LibraryPath Value="C:\Dev\SDL2-2.0.5\i686-w64-mingw32\lib"/>
-        <LibraryPath Value="C:\Dev\GLEW\lib"/>
+        <LibraryPath Value="D:\SDL2-2.0.5\i686-w64-mingw32\lib"/>
+        <LibraryPath Value="D:\GLEW\lib"/>
         <Library Value="mingw32"/>
         <Library Value="SDL2main"/>
         <Library Value="SDL2"/>
