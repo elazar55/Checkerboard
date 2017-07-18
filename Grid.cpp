@@ -50,7 +50,10 @@ Grid::Grid(int x_divisions, int y_divisions, GLuint program_ID)
     glTexParameteri(GL_TEXTURE_1D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 }
 
-Grid::~Grid() { glDeleteTextures(1, &grid_texture); }
+Grid::~Grid()
+{
+    glDeleteTextures(1, &grid_texture);
+}
 
 void Grid::Render()
 {
@@ -74,7 +77,7 @@ void Grid::HandleMouse(Mouse& mouse)
 
     int index = (mouse.GetX() / x_seperator) +
                 (x_divisions * ((y_divisions - 1) -  // Inverted Y Axis
-                (mouse.GetY() / y_seperator)));
+                                (mouse.GetY() / y_seperator)));
 
     int ix = index % x_divisions;
     int iy = index / x_divisions;
@@ -170,7 +173,7 @@ void Grid::HandleMouse(Mouse& mouse)
 
 bool Grid::IsSolved()
 {
-    for (size_t i = 0; i < grid_data.size() - 3; i +=3 )
+    for (size_t i = 0; i < grid_data.size() - 3; i +=3)
     {
         GLubyte color_r = grid_data[i + 0];
         GLubyte color_g = grid_data[i + 1];
@@ -181,11 +184,9 @@ bool Grid::IsSolved()
         GLubyte next_color_b = grid_data[i + 5];
 
         if (color_r != next_color_r)
-        if (color_g != next_color_g)
-        if (color_b != next_color_b)
-        {
-            return false;
-        }
+            if (color_g != next_color_g)
+                if (color_b != next_color_b)
+                    return false;
     }
 
     return true;
