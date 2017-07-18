@@ -6,9 +6,9 @@ Grid::Grid(int x_divisions, int y_divisions, GLuint program_ID)
     this->y_divisions = y_divisions;
 
     grid_data.resize(x_divisions * y_divisions * 3, 0);
-    GLubyte color_r = (rand() % 230) + 10;
-    GLubyte color_g = (rand() % 230) + 10;
-    GLubyte color_b = (rand() % 230) + 10;
+    GLubyte color_r = (rand() % 135) + 60;
+    GLubyte color_g = (rand() % 135) + 60;
+    GLubyte color_b = (rand() % 135) + 60;
 
     for (size_t i = 0; i < grid_data.size(); i += 3)
     {
@@ -90,85 +90,38 @@ void Grid::HandleMouse(Mouse& mouse)
     if (mouse.LeftClick())
     {
         cout << "X: " << ix << endl << "Y: " << iy << endl;
-        // Center
-        grid_data[index + 0] = ~grid_data[index + 0];
-        grid_data[index + 1] = ~grid_data[index + 1];
-        grid_data[index + 2] = ~grid_data[index + 2];
 
-        // Top
-        if (iy < y_divisions - 1)
-        {
-            grid_data[index + x_divisions * 3 + 0] = ~grid_data[index + x_divisions * 3 + 0];
-            grid_data[index + x_divisions * 3 + 1] = ~grid_data[index + x_divisions * 3 + 1];
-            grid_data[index + x_divisions * 3 + 2] = ~grid_data[index + x_divisions * 3 + 2];
-        }
-
-        // Bottom
-        if (iy > 0)
-        {
-            grid_data[index - x_divisions * 3 + 0] = ~grid_data[index - x_divisions * 3 + 0];
-            grid_data[index - x_divisions * 3 + 1] = ~grid_data[index - x_divisions * 3 + 1];
-            grid_data[index - x_divisions * 3 + 2] = ~grid_data[index - x_divisions * 3 + 2];
-        }
-
-        // Left
-        if (ix > 0)
-        {
-            grid_data[index - 1] = ~grid_data[index - 1];
-            grid_data[index - 2] = ~grid_data[index - 2];
-            grid_data[index - 3] = ~grid_data[index - 3];
-        }
-
-        // Right
-        if (ix < x_divisions - 1)
-        {
-            grid_data[index + 3] = ~grid_data[index + 3];
-            grid_data[index + 4] = ~grid_data[index + 4];
-            grid_data[index + 5] = ~grid_data[index + 5];
-        }
+        InvertSquare(index);                                             // Center
+        if (iy < y_divisions - 1) InvertSquare(index + x_divisions * 3); // Top
+        if (ix < x_divisions - 1) InvertSquare(index + 3);               // Right
+        if (iy > 0) InvertSquare(index - x_divisions * 3);               // Bottom
+        if (ix > 0) InvertSquare(index - 3);                             // Left
 
         grid_copy = grid_data;
     }
     // Hovering over a square
     else
     {
-        // Center
-        grid_data[index + 0] = grid_copy[index + 0] + 10;
-        grid_data[index + 1] = grid_copy[index + 1] + 10;
-        grid_data[index + 2] = grid_copy[index + 2] + 10;
-
-        // Top
-        if (iy < y_divisions - 1)
-        {
-            grid_data[index + x_divisions * 3 + 0] = grid_copy[index + x_divisions * 3 + 0] + 10;
-            grid_data[index + x_divisions * 3 + 1] = grid_copy[index + x_divisions * 3 + 1] + 10;
-            grid_data[index + x_divisions * 3 + 2] = grid_copy[index + x_divisions * 3 + 2] + 10;
-        }
-
-        // Bottom
-        if (iy > 0)
-        {
-            grid_data[index - x_divisions * 3 + 0] = grid_copy[index - x_divisions * 3 + 0] + 10;
-            grid_data[index - x_divisions * 3 + 1] = grid_copy[index - x_divisions * 3 + 1] + 10;
-            grid_data[index - x_divisions * 3 + 2] = grid_copy[index - x_divisions * 3 + 2] + 10;
-        }
-
-        // Left
-        if (ix > 0)
-        {
-            grid_data[index - 1] = grid_data[index - 1] + 10;
-            grid_data[index - 2] = grid_data[index - 2] + 10;
-            grid_data[index - 3] = grid_data[index - 3] + 10;
-        }
-
-        // Right
-        if (ix < x_divisions - 1)
-        {
-            grid_data[index + 3] = grid_data[index + 3] + 10;
-            grid_data[index + 4] = grid_data[index + 4] + 10;
-            grid_data[index + 5] = grid_data[index + 5] + 10;
-        }
+        HighlightSquare(index);                                             // Center
+        if (iy < y_divisions - 1) HighlightSquare(index + x_divisions * 3); // Top
+        if (ix < x_divisions - 1) HighlightSquare(index + 3);               // Right
+        if (iy > 0) HighlightSquare(index - x_divisions * 3);               // Bottom
+        if (ix > 0) HighlightSquare(index - 3);                             // Left
     }
+}
+
+void Grid::HighlightSquare(int index)
+{
+    grid_data[index + 0] += 30;
+    grid_data[index + 1] += 30;
+    grid_data[index + 2] += 30;
+}
+
+void Grid::InvertSquare(int index)
+{
+    grid_data[index + 0] = ~grid_data[index + 0];
+    grid_data[index + 1] = ~grid_data[index + 1];
+    grid_data[index + 2] = ~grid_data[index + 2];
 }
 
 bool Grid::IsSolved()

@@ -13,6 +13,7 @@
   <VirtualDirectory Name="shaders">
     <File Name="main.vert"/>
     <File Name="main.frag"/>
+    <File Name="title.frag"/>
   </VirtualDirectory>
   <Settings Type="Executable">
     <GlobalSettings>

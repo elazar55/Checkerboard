@@ -14,7 +14,7 @@ using namespace std;
 
 class Grid
 {
-  public:
+public:
     Grid(int x_divisions, int y_divisions, GLuint program_ID);
     ~Grid();
 
@@ -22,7 +22,7 @@ class Grid
     void HandleMouse(Mouse& mouse);
     bool IsSolved();
 
-  private:
+private:
     int x_divisions;
     int y_divisions;
 
@@ -32,6 +32,9 @@ class Grid
 
     vector<GLubyte> grid_data;
     vector<GLubyte> grid_copy;
+
+    void HighlightSquare(int index);
+    void InvertSquare(int index);
 };
 
 #endif  // GRID_H

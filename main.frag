@@ -1,12 +1,10 @@
 #version 440 core
 
 out vec4 output_color;
-//
 uniform int x_divisions;
 uniform int y_divisions;
 uniform int window_width;
 uniform int window_height;
-//
 uniform sampler1D grid_sampler;
 
 void main()

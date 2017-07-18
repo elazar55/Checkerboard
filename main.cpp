@@ -1,5 +1,6 @@
 #include <windows.h>
 #include <glew.h>
+#include <GL/glext.h>
 #include "Grid.h"
 #include "Program.h"
 #include "Window.h"
@@ -25,7 +26,7 @@ void HandleKeys(SDL_Event& event, Grid* grid, GLuint program_ID, Mouse& mouse)
     if (event.key.keysym.sym == SDLK_r && event.key.state  == SDL_PRESSED)
     {
         delete grid;
-        grid = new Grid(16, 12, program_ID);
+        grid = new Grid(32, 24, program_ID);
     }
     if (mouse.LeftClick())
     {
@@ -34,7 +35,7 @@ void HandleKeys(SDL_Event& event, Grid* grid, GLuint program_ID, Mouse& mouse)
             cout << "Solved!" << endl;
 
             delete grid;
-            grid = new Grid(16, 12, program_ID);
+            grid = new Grid(32, 24, program_ID);
         }
     }
 }
@@ -62,7 +63,7 @@ int main(int argc, char** argv)
     glUniform1i(window_height_uniform, window.GetHeight());
 
     // Grid
-    Grid* grid = new Grid(16, 12, program.GetID());
+    Grid* grid = new Grid(32, 24, program.GetID());
 
     // Input objects
     Mouse     mouse;
