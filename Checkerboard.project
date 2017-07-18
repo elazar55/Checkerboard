@@ -4,15 +4,10 @@
   <Dependencies/>
   <VirtualDirectory Name="src">
     <File Name="main.cpp"/>
-    <File Name="Program.h"/>
     <File Name="Program.cpp"/>
-    <File Name="Framework.h"/>
     <File Name="Framework.cpp"/>
-    <File Name="Grid.h"/>
     <File Name="Grid.cpp"/>
-    <File Name="Window.h"/>
     <File Name="Window.cpp"/>
-    <File Name="Mouse.h"/>
     <File Name="Mouse.cpp"/>
   </VirtualDirectory>
   <VirtualDirectory Name="shaders">
@@ -128,4 +123,11 @@
       </Completion>
     </Configuration>
   </Settings>
+  <VirtualDirectory Name="inc">
+    <File Name="Framework.h"/>
+    <File Name="Grid.h"/>
+    <File Name="Mouse.h"/>
+    <File Name="Program.h"/>
+    <File Name="Window.h"/>
+  </VirtualDirectory>
 </CodeLite_Project>
